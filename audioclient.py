@@ -11,7 +11,7 @@ CHUNK = 4096
 IP = 'localhost'
 PORT = 65535
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('62.203.180.48', 65535))
+s.connect((IP, PORT))
 
 
 def callback(in_data, frame_count, time_info, status):
