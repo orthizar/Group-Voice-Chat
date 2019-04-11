@@ -1,10 +1,9 @@
-import pyaudio
 import socket, threading
 clients = []
 CHUNK = 4096
 
 class forwarding(threading.Thread):
-    def __init__(self,clientAddress,clientsocket):
+    def __init__(self, clientAddress, clientsocket):
         threading.Thread.__init__(self)
         self.num = len(clients)
         clients.append(clientsocket)
@@ -18,7 +17,6 @@ class forwarding(threading.Thread):
                 data = self.csocket.recv(CHUNK)
             except:
                 print('Client at ' + str(clientAddress) + ' disconnected...')
-                clients.remove(self.num)
                 newthread.stop()
             finally:
                 for i in range(len(clients)):
