@@ -1,28 +1,41 @@
 import socket, threading
 clients = []
 CHUNK = 4096
-
+count = 0
+users = 0
 class forwarding(threading.Thread):
     def __init__(self, clientAddress, clientsocket):
+        global count
         threading.Thread.__init__(self)
-        self.num = len(clients)
+        self.num = count
+        count += 1
         clients.append(clientsocket)
         self.csocket = clientsocket
         self.addr = clientAddress
-        print('New connection added: ' + str(clientAddress))
+        print('Client at ' + str(clientAddress) + ' queued...')
     def run(self):
-        print('Connection from: ' + str(clientAddress))
+        global count
+        global users
+        print('Client at ' + str(clientAddress) + ' connected to voice-chat.')
+        users += 1
+        print('{} users'.format(users))
         while True:
             try:
                 data = self.csocket.recv(CHUNK)
             except:
                 print('Client at ' + str(clientAddress) + ' disconnected...')
+                clients.remove(clients[self.num])
+                count -= 1
+                users -= 1
+                print('{} users'.format(users))
                 break
             finally:
                 for i in range(len(clients)):
                     if not i == self.num:
                         try:
                             clients[i].send(data)
+                        except:
+                            pass
 IP = '0.0.0.0'
 PORT = 65535
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
