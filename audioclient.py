@@ -12,8 +12,8 @@ if len(sys.argv) > 1:
     IP = sys.argv[1]
     PORT = int(sys.argv[2])
 else:
-    IP = input("IP:")
-    PORT = int(input("Port:"))
+    IP = input('IP:')
+    PORT = int(input('Port:'))
 s.connect((IP, PORT))
 def callback(in_data, frame_count, time_info, status):
     s.send(in_data)
