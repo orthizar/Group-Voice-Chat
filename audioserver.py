@@ -17,11 +17,12 @@ class forwarding(threading.Thread):
                 data = self.csocket.recv(CHUNK)
             except:
                 print('Client at ' + str(clientAddress) + ' disconnected...')
-                newthread.stop()
+                break
             finally:
                 for i in range(len(clients)):
                     if not i == self.num:
-                        clients[i].send(data)
+                        try:
+                            clients[i].send(data)
 IP = '0.0.0.0'
 PORT = 65535
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
