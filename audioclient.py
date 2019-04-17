@@ -1,8 +1,4 @@
-import pyaudio
-import socket
-import sys
-import threading
-
+import pyaudio, socket, sys, threading
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
 RATE = 192000

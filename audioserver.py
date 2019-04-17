@@ -1,4 +1,4 @@
-import socket, threading
+import socket, threading, sys
 clients = []
 CHUNK = 4096
 count = 0
@@ -36,8 +36,12 @@ class forwarding(threading.Thread):
                             clients[i].send(data)
                         except:
                             pass
-IP = '0.0.0.0'
-PORT = 65535
+if len(sys.argv) > 1:
+    IP = sys.argv[1]
+    PORT = int(sys.argv[2])
+else:
+    IP = '0.0.0.0'
+    PORT = 65535
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind((IP, PORT))
