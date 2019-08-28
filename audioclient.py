@@ -1,15 +1,17 @@
 import pyaudio, socket, sys, threading
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
-RATE = 192000
+RATE = 44100
 CHUNK = 4096
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 if len(sys.argv) > 1:
     IP = sys.argv[1]
     PORT = int(sys.argv[2])
 else:
-    IP = input('IP:')
-    PORT = int(input('Port:'))
+    # IP = input('IP:')
+    # PORT = int(input('Port:'))
+    IP = '192.168.1.159'
+    PORT = 65535
 s.connect((IP, PORT))
 def callback(in_data, frame_count, time_info, status):
     s.send(in_data)
