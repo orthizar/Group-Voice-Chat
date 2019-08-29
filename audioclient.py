@@ -10,7 +10,7 @@ if len(sys.argv) > 1:
 else:
     # IP = input('IP:')
     # PORT = int(input('Port:'))
-    IP = '192.168.1.159'
+    IP = '127.0.0.1'
     PORT = 65535
 s.connect((IP, PORT))
 def callback(in_data, frame_count, time_info, status):
