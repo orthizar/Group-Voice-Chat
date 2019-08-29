@@ -1,1 +1,4 @@
 .vs/
+build/
+*.spec
+__pycache__/
